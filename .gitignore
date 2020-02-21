@@ -1,2 +1,5 @@
 # go binary
 bin
+
+# MySQL container
+docker/mysql/data
