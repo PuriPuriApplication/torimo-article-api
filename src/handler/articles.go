@@ -19,7 +19,8 @@ var (
 	seq      = 1
 )
 
-func (h *Handler) createArticle(c echo.Context) error {
+// CreateArticle return error
+func (h *Handler) CreateArticle(c echo.Context) error {
 	a := &article{
 		ID: seq,
 	}
@@ -31,12 +32,14 @@ func (h *Handler) createArticle(c echo.Context) error {
 	return c.JSON(http.StatusCreated, a)
 }
 
-func (h *Handler) getArticle(c echo.Context) error {
+// GetArticle return error
+func (h *Handler) GetArticle(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	return c.JSON(http.StatusOK, articles[id])
 }
 
-func (h *Handler) updateArticle(c echo.Context) error {
+// UpdateArticle return error
+func (h *Handler) UpdateArticle(c echo.Context) error {
 	a := new(article)
 	if err := c.Bind(a); err != nil {
 		return err
@@ -46,7 +49,8 @@ func (h *Handler) updateArticle(c echo.Context) error {
 	return c.JSON(http.StatusOK, articles[id])
 }
 
-func (h *Handler) deleteArticle(c echo.Context) error {
+// DeleteArticle return error
+func (h *Handler) DeleteArticle(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	delete(articles, id)
 	return c.NoContent(http.StatusNoContent)
