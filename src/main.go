@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"torimo-article-api/src/handler"
 
 	"github.com/labstack/echo"
@@ -15,6 +16,14 @@ func main() {
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+
+	// CORS restricted
+	// Allows requests from any `http://localhost:8888` or `https://torimo-a04a5.firebaseapp.com` origin
+	// wth GET, PUT, POST or DELETE method.
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:8888", "https://torimo-a04a5.firebaseapp.com"},
+		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+	}))
 
 	// Handler
 	h := &handler.Handler{}
