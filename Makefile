@@ -3,3 +3,6 @@ build:
 
 clean:
 	rm -rf ./bin
+
+run:
+    go run main.go
