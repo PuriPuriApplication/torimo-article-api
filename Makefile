@@ -5,4 +5,4 @@ clean:
 	rm -rf ./bin
 
 run:
-    go run main.go
+	go run src/main.go
