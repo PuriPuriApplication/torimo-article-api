@@ -3,11 +3,20 @@ package main
 import (
 	"net/http"
 	"torimo-article-api/src/handler"
+	"torimo-article-api/src/validate"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"torimo-article-api/src/db"
 )
+
+// type CustomValidator struct {
+// 	validator *validator.Validate
+// }
+
+// func (cv *CustomValidator) Validate(i interface{}) error {
+// 	return cv.validator.Struct(i)
+// }
 
 func main() {
 
@@ -17,6 +26,10 @@ func main() {
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+
+	// custom validator
+	e.Validator = validate.NewValidator()
+	// e.Validator = &CustomValidator{validator: validator.New()}
 
 	// CORS restricted
 	// Allows requests from any `http://localhost:8888` or `https://torimo-a04a5.firebaseapp.com` origin
@@ -30,8 +43,8 @@ func main() {
 	d := db.Init()
 	h := handler.NewHandler(d)
 
-	// e.POST("/articles", h.CreateArticle)
-	e.GET("/articles", h.GetArticle)
+	e.POST("/articles", h.CreateArticle)
+	// e.GET("/articles", h.GetArticle)
 	// e.GET("/articles/:id", h.GetArticle)
 	// e.PUT("/articles/:id", h.UpdateArticle)
 	// e.DELETE("/articles/:id", h.DeleteArticle)
