@@ -6,6 +6,7 @@ import (
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	"torimo-article-api/src/db"
 )
 
 func main() {
@@ -26,13 +27,15 @@ func main() {
 	}))
 
 	// Handler
-	h := &handler.Handler{}
+	d := db.Init()
+	h := handler.NewHandler(d)
 
-	e.POST("/articles", h.CreateArticle)
-	e.GET("/articles/:id", h.GetArticle)
-	e.PUT("/articles/:id", h.UpdateArticle)
-	e.DELETE("/articles/:id", h.DeleteArticle)
+	// e.POST("/articles", h.CreateArticle)
+	e.GET("/articles", h.GetArticle)
+	// e.GET("/articles/:id", h.GetArticle)
+	// e.PUT("/articles/:id", h.UpdateArticle)
+	// e.DELETE("/articles/:id", h.DeleteArticle)
 
 	// Start server
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":8080"))
 }
