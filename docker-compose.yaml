@@ -1,6 +1,21 @@
 version: '3'
 
 services:
+  torimo-article-api:
+    container_name: article
+    environment:
+      USER: torimo
+      PASSWORD: torimo
+      DBNAME: torimo
+      URL: mysql:3306
+    build: .
+    image: article:${VERSION}
+    working_dir: "/app"
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
+
   mysql:
     image: mysql:5.7
     container_name: mysql
