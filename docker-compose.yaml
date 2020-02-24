@@ -4,10 +4,10 @@ services:
   torimo-article-api:
     container_name: article
     environment:
-      USER: torimo
-      PASSWORD: torimo
-      DBNAME: torimo
-      URL: mysql:3306
+      DB_USER: torimo
+      DB_PASSWORD: torimo
+      DB_DBNAME: torimo
+      DB_URL: mysql:3306
     build: .
     image: article:${VERSION}
     working_dir: "/app"
