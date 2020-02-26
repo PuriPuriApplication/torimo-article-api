@@ -3,7 +3,7 @@ package handler
 import (
 	"time"
 	"fmt"
-	"torimo-article-api/src/model"
+	"torimo-article-api/src/domain/model"
 	// "os"
 	"net/http"
 	"github.com/go-playground/validator/v10"

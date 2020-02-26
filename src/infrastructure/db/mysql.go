@@ -19,13 +19,15 @@ func Init() *gorm.DB {
 	var env env
 	envconfig.Process("", &env)
 
-	db, err := gorm.Open(
-		"mysql",
-		fmt.Sprintf("%s:%s@(%s)/%s?charset=utf8&parseTime=True&loc=Local", env.DB_User, env.DB_Password, env.DB_Url, env.DB_Dbname),
-	)
+	// Connect to mysql
+	connect := fmt.Sprintf("%s:%s@(%s)/%s?charset=utf8&parseTime=True&loc=Local", env.DB_User, env.DB_Password, env.DB_Url, env.DB_Dbname)
+	db, err := gorm.Open("mysql", connect)
 	if err != nil {
 		panic("failed to connect database")
 	}
+
+	// Log setting
+	db.LogMode(true)
 
 	return db
 }
