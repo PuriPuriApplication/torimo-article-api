@@ -1,9 +1,11 @@
 FROM golang:1.13.7-alpine3.11
 
-WORKDIR /app
+WORKDIR /torimo-article-api
 
 ENV GO111MODULE=on
 
 COPY . .
 
-CMD ["go", "run", "src/main.go"]
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build src/*.go
+
+CMD ["./main"]
