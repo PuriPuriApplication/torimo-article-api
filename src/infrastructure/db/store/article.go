@@ -12,7 +12,7 @@ type ArticleDatastore struct {
 	db *gorm.DB
 }
 
-func NewRefrigeratorDatastore(d *gorm.DB) repository.IArticleRepository {
+func NewArticleDatastore(d *gorm.DB) repository.IArticleRepository {
 	return &ArticleDatastore{
 		db: d,
 	}

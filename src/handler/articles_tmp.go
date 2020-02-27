@@ -16,11 +16,11 @@ type ArticleHandler struct{
 	ArticleUsecase usecase.IArticleUsecase
 }
 
-// func NewArticleHandler(au usecase.IArticleUsecase) *ArticleHandler {
-// 	return &ArticleHandler{
-// 		ArticleUsecase: au,
-// 	}
-// }
+func NewArticleHandler(au usecase.IArticleUsecase) *ArticleHandler {
+	return &ArticleHandler{
+		ArticleUsecase: au,
+	}
+}
 
 // CreateArticle return error
 func (ah *ArticleHandler) CreateArticle(c echo.Context) error {

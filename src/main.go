@@ -1,10 +1,10 @@
+//+wireinject
+
 package main
 
 import (
 	"net/http"
-	"torimo-article-api/src/handler"
 	"torimo-article-api/src/handler/custom"
-	"torimo-article-api/src/registry"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -35,9 +35,12 @@ func main() {
 	// Handler
 	d := db.Init()
 	// h := handler.NewHandler(d)
-	h := handler.ArticleHandler{}
+	// h := handler.ArticleHandler{}
 
-	registry.New(d)
+	// h := registry.New(d)
+	h, _ := Initialize(d)
+
+	// Init(d, e)
 
 	e.POST("/articles", h.CreateArticle)
 	// e.GET("/articles", h.GetArticle)
