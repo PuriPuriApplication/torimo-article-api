@@ -10,9 +10,7 @@ services:
       DB_URL: mysql:3306
     build: .
     image: article:${VERSION}
-    working_dir: "/app"
-    volumes:
-      - .:/app
+    working_dir: "/torimo-article-api"
     ports:
       - 8080:8080
     depends_on:
