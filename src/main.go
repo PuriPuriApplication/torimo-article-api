@@ -1,19 +1,17 @@
-//+wireinject
-
 package main
 
 import (
-	"net/http"
 	"torimo-article-api/src/handler/custom"
+	"torimo-article-api/src/infrastructure/db"
 
+	"net/http"
+
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"torimo-article-api/src/infrastructure/db"
-	"github.com/go-playground/validator/v10"
 )
 
 func main() {
-
 	// create instance
 	e := echo.New()
 
@@ -34,11 +32,12 @@ func main() {
 
 	// Handler
 	d := db.Init()
+	defer db.Close(d)
 	// h := handler.NewHandler(d)
 	// h := handler.ArticleHandler{}
 
 	// h := registry.New(d)
-	h, _ := Initialize(d)
+	h := Initialize(d)
 
 	// Init(d, e)
 
