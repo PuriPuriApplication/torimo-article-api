@@ -9,7 +9,7 @@ services:
       DB_DBNAME: torimo
       DB_URL: mysql:3306
     build: .
-    image: article:${VERSION}
+    image: article
     working_dir: "/torimo-article-api"
     ports:
       - 8080:8080
