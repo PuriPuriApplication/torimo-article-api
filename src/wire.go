@@ -3,7 +3,6 @@
 package main
 
 import (
-	"context"
 	"github.com/google/wire"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -13,7 +12,7 @@ import (
 	"torimo-article-api/src/interactor"
 )
 
-func Initialize(ctx context.Context, d *gorm.DB) *handler.ArticleHandler {
+func Initialize(d *gorm.DB) *handler.ArticleHandler {
 	wire.Build(
 		store.NewArticleDatastore,
 		interactor.NewArticleInteractor,
