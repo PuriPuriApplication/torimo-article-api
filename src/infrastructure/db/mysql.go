@@ -2,16 +2,17 @@ package db
 
 import (
 	"fmt"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/kelseyhightower/envconfig"
 )
 
 type env struct {
-	DB_User  string    `default:"torimo"`
+	DB_User     string `default:"torimo"`
 	DB_Password string `default:"torimo"`
-	DB_Dbname string   `default:"torimo"`
-	DB_Url string      `default:"127.0.0.1:3306"`
+	DB_Dbname   string `default:"torimo"`
+	DB_Url      string `default:"127.0.0.1:3306"`
 }
 
 func Init() *gorm.DB {
@@ -30,4 +31,12 @@ func Init() *gorm.DB {
 	db.LogMode(true)
 
 	return db
+}
+
+func Close(db *gorm.DB) {
+	if db != nil {
+		if err := db.Close(); err != nil {
+			panic(err)
+		}
+	}
 }
