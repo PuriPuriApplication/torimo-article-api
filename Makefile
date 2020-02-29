@@ -1,8 +1,38 @@
+APP = torimo-article-api
+
+.PHONY: log
+log:
+	docker-compose logs $(APP)
+
+.PHONY: rm
+rm:
+	-docker rm $(shell docker ps -a --filter 'status=exited' -q)
+
+.PHONY: run
+run: up log
+
+.PHONY: up
+up:
+	docker-compose up -d
+
+.PHONY: reload
+reload: rm build restart log
+
+.PHONY: restart
+restart:
+	docker-compose restart $(APP)
+
+.PHONY: build
 build:
-	go build -o bin/torimo-article-api src/*.go
+	docker-compose build $(APP)
 
-clean:
-	rm -rf ./bin
+.PHONY: clean
+clean: down rm rmi
 
-run:
-	go run src/main.go
+.PHONY: down
+down:
+	docker-compose down
+
+.PHONY: rmi
+rmi:
+	docker image prune -f
