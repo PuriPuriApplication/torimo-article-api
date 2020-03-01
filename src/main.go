@@ -1,8 +1,8 @@
 package main
 
 import (
+	"torimo-article-api/src/driver"
 	"torimo-article-api/src/handler/custom"
-	"torimo-article-api/src/infrastructure/db"
 
 	"net/http"
 
@@ -31,7 +31,7 @@ func main() {
 	}
 
 	// Handler
-	d := db.Init()
+	d := driver.Init()
 	// defer db.Close(d)
 
 	h := Initialize(d)
