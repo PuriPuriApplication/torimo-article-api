@@ -32,11 +32,8 @@ func main() {
 
 	// Handler
 	d := db.Init()
-	defer db.Close(d)
-	// h := handler.NewHandler(d)
-	// h := handler.ArticleHandler{}
+	// defer db.Close(d)
 
-	// h := registry.New(d)
 	h := Initialize(d)
 
 	// Init(d, e)
