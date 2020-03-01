@@ -8,16 +8,16 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
 	"torimo-article-api/src/handler"
-	"torimo-article-api/src/infrastructure/db/store"
+	"torimo-article-api/src/infrastructure/datastore"
 	"torimo-article-api/src/interactor"
 )
 
 func Initialize(d *gorm.DB) *handler.ArticleHandler {
 	wire.Build(
-		store.NewArticleDatastore,
-		store.NewUserDatastore,
-		store.NewShopDatastore,
-		store.NewCategoryDatastore,
+		datastore.NewArticleDatastore,
+		datastore.NewUserDatastore,
+		datastore.NewShopDatastore,
+		datastore.NewCategoryDatastore,
 		interactor.NewArticleInteractor,
 		handler.NewArticleHandler,
 	)
