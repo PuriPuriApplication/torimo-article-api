@@ -6,6 +6,9 @@ ENV GO111MODULE=on
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build src/*.go
+# TODO: main.go のあるディレクトリでビルドを実行しないとうまくいかない (wire)
+RUN cd src \
+  && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ../main \
+  && cd ..
 
 CMD ["./main"]
