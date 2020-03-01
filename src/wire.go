@@ -15,6 +15,9 @@ import (
 func Initialize(d *gorm.DB) *handler.ArticleHandler {
 	wire.Build(
 		store.NewArticleDatastore,
+		store.NewUserDatastore,
+		store.NewShopDatastore,
+		store.NewCategoryDatastore,
 		interactor.NewArticleInteractor,
 		handler.NewArticleHandler,
 	)
