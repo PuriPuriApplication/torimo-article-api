@@ -1,63 +1,53 @@
 package interactor
 
 import (
-	"go.uber.org/dig"
 	"time"
 
-	"torimo-article-api/src/handler/request"
-	"torimo-article-api/src/domain/repository"
 	"torimo-article-api/src/domain/model"
+	"torimo-article-api/src/domain/repository"
+	"torimo-article-api/src/handler/request"
 	"torimo-article-api/src/usecase"
 )
 
 type ArticleInteractor struct {
-	dig.In
-	Repository repository.IArticleRepository
+	Repository         repository.IArticleRepository
+	UserRepository     repository.IUserRepository
+	ShopRepository     repository.IShopRepository
+	CategoryRepository repository.ICategoryRepository
 }
 
-func NewArticleInteractor(repository repository.IArticleRepository) usecase.IArticleUsecase {
+func NewArticleInteractor(
+	repository repository.IArticleRepository,
+	userRepository repository.IUserRepository,
+	shopRepository repository.IShopRepository,
+	categoryRepository repository.ICategoryRepository,
+) usecase.IArticleUsecase {
 	return &ArticleInteractor{
-		Repository: repository,
+		Repository:         repository,
+		UserRepository:     userRepository,
+		ShopRepository:     shopRepository,
+		CategoryRepository: categoryRepository,
 	}
 }
 
 func (a *ArticleInteractor) Create(ra *request.RequestArticle) model.Article {
+	categories := a.CategoryRepository.FindByIdIn(ra.CategoryIDs)
+
+	shop := a.ShopRepository.FindById(ra.ShopID)
+
+	user := a.UserRepository.FindById(ra.UserID)
+
 	article := model.Article{
-		Title: ra.Title,
-		Body: ra.Body,
-		Status: ra.Status,
-		User: model.User{
-			Id: 1,
-			Name: "1",
-			ExternalServiceID: "1",
-			ExternalServiceType: "1",
-			IsDeleted: false,
-			CreateAt: time.Now(),
-			UpdateAt: nil,
-			DeleteAt: nil,
-		},
-		Shop: model.Shop{
-			ID: 1,
-			Name: "1",
-			StationID: 1,
-			CreateUser: 1,
-			IsDeleted: false,
-			CreateAt: time.Now(),
-			DeleteAt: nil,
-		},
-		Categories: []model.Category{
-			{
-				ID: 1,
-				Name: "1",
-				CreateUser: 1,
-				IsDeleted: false,
-				CreateAt: nil,
-				DeleteAt: nil,
-			},
-		},
-		CreateAt: time.Now(),
+		Title:      ra.Title,
+		Body:       ra.Body,
+		Status:     ra.Status,
+		User:       user,
+		Shop:       shop,
+		Categories: categories,
+		CreateAt:   time.Now(),
 	}
 
 	a.Repository.Save(&article)
+
 	return article
 }
