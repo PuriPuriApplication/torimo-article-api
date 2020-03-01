@@ -5,12 +5,12 @@ import (
 )
 
 // Handler is Struct
-type Handler struct{
+type Handler struct {
 	db *gorm.DB
 }
 
 func NewHandler(d *gorm.DB) *Handler {
-	return &Handler {
+	return &Handler{
 		db: d,
 	}
 }

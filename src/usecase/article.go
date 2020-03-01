@@ -8,4 +8,3 @@ import (
 type IArticleUsecase interface {
 	Create(requestArticle *request.RequestArticle) model.Article
 }
-

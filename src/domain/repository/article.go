@@ -7,4 +7,3 @@ import (
 type IArticleRepository interface {
 	Save(article *model.Article)
 }
-

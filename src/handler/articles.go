@@ -1,23 +1,25 @@
 package handler
 
 import (
-	"time"
 	"fmt"
+	"time"
 	"torimo-article-api/src/domain/model"
+
 	// "os"
 	"net/http"
+
 	"github.com/go-playground/validator/v10"
 
 	"github.com/labstack/echo"
 )
 
 type RequestArticle struct {
-	Title string           `json:"title"  validate:"required,max=100"`
-	Body string            `json:"body"   validate:"required"`
-	Status string          `json:"status" validate:"required,max=16"`
-	UserID int64           `json:"userId" validate:"required"`
-	ShopID string          `json:"shopId"`
-	CategoryIDs []int      `json:"categoryIds"`
+	Title       string   `json:"title"  validate:"required,max=100"`
+	Body        string   `json:"body"   validate:"required"`
+	Status      string   `json:"status" validate:"required,max=16"`
+	UserID      uint64   `json:"userId" validate:"required"`
+	ShopID      string   `json:"shopId"`
+	CategoryIDs []uint64 `json:"categoryIds"`
 }
 
 // CreateArticle return error
@@ -33,8 +35,8 @@ func (h *Handler) CreateArticle(c echo.Context) error {
 
 	// *** request file include. ***
 	// avatar, err := c.FormFile("image")
-  	// if err != nil {
- 	// 	return err
+	// if err != nil {
+	// 	return err
 	// }
 
 	category := []model.Category{}
@@ -49,13 +51,13 @@ func (h *Handler) CreateArticle(c echo.Context) error {
 	h.db.Find(&user, "id=?", ra.UserID)
 
 	article := model.Article{
-		Title: ra.Title,
-		Body: ra.Body,
-		Status: ra.Status,
-		User: user,
-		Shop: shop,
+		Title:      ra.Title,
+		Body:       ra.Body,
+		Status:     ra.Status,
+		User:       user,
+		Shop:       shop,
 		Categories: category,
-		CreateAt: time.Now(),
+		CreateAt:   time.Now(),
 	}
 
 	h.db.Create(&article)

@@ -1,17 +1,18 @@
 package handler
 
 import (
-	"go.uber.org/dig"
 	"net/http"
-	"github.com/labstack/echo"
+
 	"github.com/go-playground/validator/v10"
+	"github.com/labstack/echo"
+	"go.uber.org/dig"
 
 	"torimo-article-api/src/handler/request"
 	"torimo-article-api/src/usecase"
 )
 
 // Handler is Struct
-type ArticleHandler struct{
+type ArticleHandler struct {
 	dig.In
 	ArticleUsecase usecase.IArticleUsecase
 }
@@ -35,11 +36,11 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 
 	// *** request file include. ***
 	// avatar, err := c.FormFile("image")
-  	// if err != nil {
- 	// 	return err
+	// if err != nil {
+	// 	return err
 	// }
 
-	article := ah.ArticleUsecase.Create(ra);
+	article := ah.ArticleUsecase.Create(ra)
 
 	return c.JSON(http.StatusCreated, article)
 }

@@ -4,8 +4,8 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"torimo-article-api/src/domain/repository"
 	"torimo-article-api/src/domain/model"
+	"torimo-article-api/src/domain/repository"
 )
 
 type ArticleDatastore struct {
