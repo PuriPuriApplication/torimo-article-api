@@ -1,4 +1,4 @@
-package store
+package datastore
 
 import (
 	"github.com/jinzhu/gorm"
