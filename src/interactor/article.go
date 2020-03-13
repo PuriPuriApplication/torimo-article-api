@@ -2,7 +2,6 @@ package interactor
 
 import (
 	"time"
-
 	"torimo-article-api/src/domain/model"
 	"torimo-article-api/src/domain/repository"
 	"torimo-article-api/src/handler/request"
@@ -10,44 +9,32 @@ import (
 )
 
 type ArticleInteractor struct {
-	Repository         repository.IArticleRepository
-	UserRepository     repository.IUserRepository
-	ShopRepository     repository.IShopRepository
-	CategoryRepository repository.ICategoryRepository
+	Repository                repository.IArticleRepository
+	ArticleCategoryRepository repository.IArticleCategoryRepository
 }
 
 func NewArticleInteractor(
 	repository repository.IArticleRepository,
-	userRepository repository.IUserRepository,
-	shopRepository repository.IShopRepository,
-	categoryRepository repository.ICategoryRepository,
+	articleCategoryRepository repository.IArticleCategoryRepository,
 ) usecase.IArticleUsecase {
 	return &ArticleInteractor{
-		Repository:         repository,
-		UserRepository:     userRepository,
-		ShopRepository:     shopRepository,
-		CategoryRepository: categoryRepository,
+		Repository:                repository,
+		ArticleCategoryRepository: articleCategoryRepository,
 	}
 }
 
-func (a *ArticleInteractor) Create(ra *request.RequestArticle) model.Article {
-	categories := a.CategoryRepository.FindByIdIn(ra.CategoryIDs)
-
-	shop := a.ShopRepository.FindById(ra.ShopID)
-
-	user := a.UserRepository.FindById(ra.UserID)
-
+func (a *ArticleInteractor) Create(ra *request.RequestArticle) uint64 {
 	article := model.Article{
-		Title:      ra.Title,
-		Body:       ra.Body,
-		Status:     ra.Status,
-		User:       user,
-		Shop:       shop,
-		Categories: categories,
-		CreateAt:   time.Now(),
+		Title:    ra.Title,
+		Body:     ra.Body,
+		Status:   ra.Status,
+		UserID:   ra.UserID,
+		ShopID:   ra.ShopID,
+		CreateAt: time.Now(),
 	}
 
 	a.Repository.Save(&article)
+	a.ArticleCategoryRepository.SaveCategoriesForArticle(article.ID, ra.CategoryIDs)
 
-	return article
+	return article.ID
 }
