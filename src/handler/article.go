@@ -49,5 +49,6 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 func (ah *ArticleHandler) GetAll(c echo.Context) error {
 	articles := ah.ArticleUsecase.GetAll()
 
-	return c.JSON(http.StatusCreated, articles)
+	return c.JSON(http.StatusOK, articles)
+}
 }
