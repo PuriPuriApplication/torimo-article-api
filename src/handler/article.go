@@ -40,7 +40,7 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 	// 	return err
 	// }
 
-	article := ah.ArticleUsecase.Create(ra)
+	articleID := ah.ArticleUsecase.Create(ra)
 
-	return c.JSON(http.StatusCreated, article)
+	return c.JSON(http.StatusCreated, articleID)
 }
