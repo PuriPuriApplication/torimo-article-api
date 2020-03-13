@@ -41,6 +41,7 @@ func main() {
 	})
 	e.POST("/articles", h.CreateArticle)
 	e.GET("/articles", h.GetAll)
+	e.GET("/articles/:id", h.GetOne)
 	// e.GET("/articles/:id", h.GetArticle)
 	// e.PUT("/articles/:id", h.UpdateArticle)
 	// e.DELETE("/articles/:id", h.DeleteArticle)

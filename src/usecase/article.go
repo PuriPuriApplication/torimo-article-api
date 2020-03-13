@@ -8,4 +8,5 @@ import (
 type IArticleUsecase interface {
 	Create(requestArticle *request.CreateArticleRequest) uint64
 	GetAll() []model.Article
+	GetOne(ID uint64) model.Article
 }

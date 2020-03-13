@@ -42,3 +42,7 @@ func (a *ArticleInteractor) Create(ra *request.CreateArticleRequest) uint64 {
 func (a *ArticleInteractor) GetAll() []model.Article {
 	return a.Repository.FindAll()
 }
+
+func (a *ArticleInteractor) GetOne(ID uint64) model.Article {
+	return a.Repository.FindOne(ID)
+}

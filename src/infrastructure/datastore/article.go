@@ -34,3 +34,9 @@ func (a *ArticleDatastore) FindAll() []model.Article {
 
 	return results
 }
+
+func (a *ArticleDatastore) FindOne(ID uint64) model.Article {
+	article := model.Article{ID: ID}
+	a.db.First(&article).Related(&article.User, "User").Related(&article.Shop, "Shop").Related(&article.Categories, "Categories")
+	return article
+}

@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo"
@@ -51,4 +52,15 @@ func (ah *ArticleHandler) GetAll(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, articles)
 }
+
+// GetOne return error
+func (ah *ArticleHandler) GetOne(c echo.Context) error {
+	ID, err := strconv.ParseUint(c.Param("id"), 10, 64)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	articles := ah.ArticleUsecase.GetOne(ID)
+
+	return c.JSON(http.StatusOK, articles)
 }
