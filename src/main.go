@@ -36,8 +36,6 @@ func main() {
 
 	h := Initialize(d)
 
-	// Init(d, e)
-
 	e.POST("/articles", h.CreateArticle)
 	// e.GET("/articles", h.GetArticle)
 	// e.GET("/articles/:id", h.GetArticle)
