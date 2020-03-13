@@ -13,7 +13,7 @@ type Article struct {
 	User       User       `json:"user"`
 	ShopID     uint64     `json:"-"`
 	Shop       Shop       `json:"shop"`
-	Categories []Category `gorm:"many2many:article_categories" json:"categories"`
+	Categories []Category `json:"categories" gorm:"many2many:article_categories"`
 	CreateAt   time.Time  `json:"createAt"`
 	UpdateAt   *time.Time `json:"updateAt"`
 }
