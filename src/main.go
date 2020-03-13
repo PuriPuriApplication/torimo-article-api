@@ -36,8 +36,11 @@ func main() {
 
 	h := Initialize(d)
 
+	e.GET("/health", func(c echo.Context) error {
+		return c.String(http.StatusOK, "OK")
+	})
 	e.POST("/articles", h.CreateArticle)
-	// e.GET("/articles", h.GetArticle)
+	e.GET("/articles", h.GetAll)
 	// e.GET("/articles/:id", h.GetArticle)
 	// e.PUT("/articles/:id", h.UpdateArticle)
 	// e.DELETE("/articles/:id", h.DeleteArticle)

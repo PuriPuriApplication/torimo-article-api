@@ -23,7 +23,7 @@ func NewArticleInteractor(
 	}
 }
 
-func (a *ArticleInteractor) Create(ra *request.RequestArticle) uint64 {
+func (a *ArticleInteractor) Create(ra *request.CreateArticleRequest) uint64 {
 	article := model.Article{
 		Title:    ra.Title,
 		Body:     ra.Body,
@@ -37,4 +37,8 @@ func (a *ArticleInteractor) Create(ra *request.RequestArticle) uint64 {
 	a.ArticleCategoryRepository.SaveCategoriesForArticle(article.ID, ra.CategoryIDs)
 
 	return article.ID
+}
+
+func (a *ArticleInteractor) GetAll() []model.Article {
+	return a.Repository.FindAll()
 }

@@ -25,7 +25,7 @@ func NewArticleHandler(au usecase.IArticleUsecase) *ArticleHandler {
 
 // CreateArticle return error
 func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
-	ra := new(request.RequestArticle)
+	ra := new(request.CreateArticleRequest)
 
 	if err := c.Bind(ra); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
@@ -43,4 +43,11 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 	articleID := ah.ArticleUsecase.Create(ra)
 
 	return c.JSON(http.StatusCreated, articleID)
+}
+
+// GetAll return error
+func (ah *ArticleHandler) GetAll(c echo.Context) error {
+	articles := ah.ArticleUsecase.GetAll()
+
+	return c.JSON(http.StatusCreated, articles)
 }
