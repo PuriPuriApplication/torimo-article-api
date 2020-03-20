@@ -7,6 +7,7 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo"
 	"go.uber.org/dig"
+	"torimo-article-api/src/handler/response"
 
 	"torimo-article-api/src/handler/request"
 	"torimo-article-api/src/usecase"
@@ -43,7 +44,7 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 
 	articleID := ah.ArticleUsecase.Create(ra)
 
-	return c.JSON(http.StatusCreated, articleID)
+	return c.JSON(http.StatusCreated, response.NewCreatedArticle(articleID))
 }
 
 // GetAll return error
