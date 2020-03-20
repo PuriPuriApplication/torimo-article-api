@@ -1,7 +1,7 @@
 package response
 
 type CreatedArticle struct {
-	Id uint64 `json:"id""`
+	Id uint64 `json:"id"`
 }
 
 // NewCreatedArticle recieves ArticleID and
