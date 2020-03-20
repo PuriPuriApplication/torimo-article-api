@@ -6,6 +6,6 @@ type CreatedArticle struct {
 
 // NewCreatedArticle recieves ArticleID and
 // returns ArticleID mapped JSON response body.
-func NewCreatedArticle(ai uint64) *CreatedArticle {
-	return &CreatedArticle{Id:ai}
+func NewCreatedArticle(id uint64) *CreatedArticle {
+	return &CreatedArticle{Id:id}
 }
