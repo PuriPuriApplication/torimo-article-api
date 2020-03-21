@@ -5,12 +5,12 @@ import (
 )
 
 type User struct {
-	ID                  uint64     `json:"id"`
-	Name                string     `json:"name"`
-	ExternalServiceID   string     `json:"externalServiceID"`
-	ExternalServiceType string     `json:"externalServiceType"`
-	IsDeleted           bool       `json:"isDeleted"`
-	CreateAt            time.Time  `json:"createAt"`
-	UpdateAt            *time.Time `json:"updateAt"`
-	DeleteAt            *time.Time `json:"deleteAt"`
+	ID                  uint64
+	Name                string
+	ExternalServiceID   string
+	ExternalServiceType string
+	IsDeleted           bool
+	CreateAt            time.Time
+	UpdateAt            *time.Time
+	DeleteAt            *time.Time
 }

@@ -5,11 +5,11 @@ import (
 )
 
 type Shop struct {
-	ID         uint64     `json:"id"`
-	Name       string     `json:"name"`
-	StationID  uint64     `json:"stationId"`
-	CreateUser uint64     `json:"createUser"`
-	IsDeleted  bool       `json:"isDeleted"`
-	CreateAt   time.Time  `json:"createAt"`
-	DeleteAt   *time.Time `json:"updateAt"`
+	ID         uint64
+	Name       string
+	StationID  uint64
+	CreateUser uint64
+	IsDeleted  bool
+	CreateAt   time.Time
+	DeleteAt   *time.Time
 }

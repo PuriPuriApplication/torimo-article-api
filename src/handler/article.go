@@ -44,7 +44,7 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 
 	articleID := ah.ArticleUsecase.Create(ra)
 
-	return c.JSON(http.StatusCreated, response.NewCreatedArticle(articleID))
+	return c.JSON(http.StatusCreated, articleID)
 }
 
 // GetAll return error
@@ -63,5 +63,5 @@ func (ah *ArticleHandler) GetOne(c echo.Context) error {
 
 	articles := ah.ArticleUsecase.GetOne(ID)
 
-	return c.JSON(http.StatusOK, articles)
+	return c.JSON(http.StatusOK, response.NewSelectedArticle(&articles))
 }
