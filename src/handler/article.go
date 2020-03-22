@@ -51,7 +51,7 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 func (ah *ArticleHandler) GetAll(c echo.Context) error {
 	articles := ah.ArticleUsecase.GetAll()
 
-	return c.JSON(http.StatusOK, articles)
+	return c.JSON(http.StatusOK, ah.ResponseUsecase.CreateAll(articles))
 }
 
 // GetOne return error
@@ -63,6 +63,5 @@ func (ah *ArticleHandler) GetOne(c echo.Context) error {
 
 	article := ah.ArticleUsecase.GetOne(ID)
 
-	return c.JSON(http.StatusOK, ah.ResponseUsecase.Create(&article))
-	//return c.JSON(http.StatusOK, response.NewSelectedArticle(&article))
+	return c.JSON(http.StatusOK, ah.ResponseUsecase.CreateOne(&article))
 }
