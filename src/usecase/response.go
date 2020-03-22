@@ -6,5 +6,6 @@ import (
 )
 
 type IResponseUsecase interface {
-	Create(a *article_model.Article) *response_model.ResponseArticle
+	CreateAll(a []article_model.Article) *[]response_model.ResponseArticle
+	CreateOne(a *article_model.Article) *response_model.ResponseArticle
 }
