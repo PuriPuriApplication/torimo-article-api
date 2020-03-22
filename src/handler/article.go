@@ -7,8 +7,6 @@ import (
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo"
 	"go.uber.org/dig"
-	"torimo-article-api/src/handler/response"
-
 	"torimo-article-api/src/handler/request"
 	"torimo-article-api/src/usecase"
 )
@@ -16,12 +14,14 @@ import (
 // Handler is Struct
 type ArticleHandler struct {
 	dig.In
-	ArticleUsecase usecase.IArticleUsecase
+	ArticleUsecase  usecase.IArticleUsecase
+	ResponseUsecase usecase.IResponseUsecase
 }
 
-func NewArticleHandler(au usecase.IArticleUsecase) *ArticleHandler {
+func NewArticleHandler(au usecase.IArticleUsecase, ru usecase.IResponseUsecase) *ArticleHandler {
 	return &ArticleHandler{
-		ArticleUsecase: au,
+		ArticleUsecase:  au,
+		ResponseUsecase: ru,
 	}
 }
 
@@ -61,7 +61,8 @@ func (ah *ArticleHandler) GetOne(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	articles := ah.ArticleUsecase.GetOne(ID)
+	article := ah.ArticleUsecase.GetOne(ID)
 
-	return c.JSON(http.StatusOK, response.NewSelectedArticle(&articles))
+	return c.JSON(http.StatusOK, ah.ResponseUsecase.Create(&article))
+	//return c.JSON(http.StatusOK, response.NewSelectedArticle(&article))
 }
