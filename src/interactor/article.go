@@ -2,20 +2,20 @@ package interactor
 
 import (
 	"time"
-	"torimo-article-api/src/domain/model"
-	"torimo-article-api/src/domain/repository"
+	"torimo-article-api/src/domain/article_model"
+	"torimo-article-api/src/domain/article_repository"
 	"torimo-article-api/src/handler/request"
 	"torimo-article-api/src/usecase"
 )
 
 type ArticleInteractor struct {
-	Repository                repository.IArticleRepository
-	ArticleCategoryRepository repository.IArticleCategoryRepository
+	Repository                article_repository.IArticleRepository
+	ArticleCategoryRepository article_repository.IArticleCategoryRepository
 }
 
 func NewArticleInteractor(
-	repository repository.IArticleRepository,
-	articleCategoryRepository repository.IArticleCategoryRepository,
+	repository article_repository.IArticleRepository,
+	articleCategoryRepository article_repository.IArticleCategoryRepository,
 ) usecase.IArticleUsecase {
 	return &ArticleInteractor{
 		Repository:                repository,
@@ -24,7 +24,7 @@ func NewArticleInteractor(
 }
 
 func (a *ArticleInteractor) Create(ra *request.CreateArticleRequest) uint64 {
-	article := model.Article{
+	article := article_model.Article{
 		Title:    ra.Title,
 		Body:     ra.Body,
 		Status:   ra.Status,
@@ -39,10 +39,10 @@ func (a *ArticleInteractor) Create(ra *request.CreateArticleRequest) uint64 {
 	return article.ID
 }
 
-func (a *ArticleInteractor) GetAll() []model.Article {
+func (a *ArticleInteractor) GetAll() []article_model.Article {
 	return a.Repository.FindAll()
 }
 
-func (a *ArticleInteractor) GetOne(ID uint64) model.Article {
+func (a *ArticleInteractor) GetOne(ID uint64) article_model.Article {
 	return a.Repository.FindOne(ID)
 }
