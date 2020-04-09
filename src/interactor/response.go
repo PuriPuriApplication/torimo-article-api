@@ -25,7 +25,7 @@ func NewResponseInteractor(
 	}
 }
 
-func (ri *ResponseInteractor) CreateAll(a []model.Article) *[]response.ResponseArticle {
+func (ri *ResponseInteractor) MappingAll(a []model.Article) *[]response.ResponseArticle {
 	var responses []response.ResponseArticle
 	for _, v := range a {
 		response := response.ResponseArticle{
@@ -43,7 +43,7 @@ func (ri *ResponseInteractor) CreateAll(a []model.Article) *[]response.ResponseA
 	return &responses
 }
 
-func (ri *ResponseInteractor) CreateOne(a *model.Article) *response.ResponseArticle {
+func (ri *ResponseInteractor) MappingOne(a *model.Article) *response.ResponseArticle {
 	return &response.ResponseArticle{
 		ID:         a.ID,
 		Title:      a.Title,
