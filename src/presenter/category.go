@@ -2,27 +2,20 @@ package presenter
 
 import (
 	"torimo-article-api/src/domain/model"
-	"torimo-article-api/src/presenter/response"
-	"torimo-article-api/src/domain/response_repository"
+	"torimo-article-api/src/handler/response"
+
+	"github.com/thoas/go-funk"
 )
 
-type CategoryDataConvert struct{}
-
-func NewCategoryDataConvert() response_repository.ICategoryRepository {
-	return &CategoryDataConvert{}
-}
-
-func (c *CategoryDataConvert) Convert(category []model.Category) []*response.ResponseCategory {
-	var categories []*response.ResponseCategory
-	for _, v := range category {
-		elem := &response.ResponseCategory{
-			ID:         v.ID,
-			Name:       v.Name,
-			CreateUser: v.CreateUser,
-			IsDeleted:  v.IsDeleted,
+func convertCategoryResponse(categories []model.Category) []*response.ResponseCategory {
+	results := funk.Map(categories, func(category model.Category) *response.ResponseCategory {
+		return &response.ResponseCategory{
+			ID:         category.ID,
+			Name:       category.Name,
+			CreateUser: category.CreateUser,
+			IsDeleted:  category.IsDeleted,
 		}
-		categories = append(categories, elem)
-	}
+	}).([]*response.ResponseCategory)
 
-	return categories
+	return results
 }

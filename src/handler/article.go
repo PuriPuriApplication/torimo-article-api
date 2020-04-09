@@ -4,24 +4,24 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-playground/validator/v10"
-	"github.com/labstack/echo"
-	"go.uber.org/dig"
+	"torimo-article-api/src/domain/presenter"
 	"torimo-article-api/src/handler/request"
 	"torimo-article-api/src/usecase"
+
+	"github.com/go-playground/validator/v10"
+	"github.com/labstack/echo"
 )
 
 // Handler is Struct
 type ArticleHandler struct {
-	dig.In
-	ArticleUsecase  usecase.IArticleUsecase
-	ResponseUsecase usecase.IResponseUsecase
+	ArticleUsecase   usecase.IArticleUsecase
+	ArticlePresenter presenter.IArticlePresenter
 }
 
-func NewArticleHandler(au usecase.IArticleUsecase, ru usecase.IResponseUsecase) *ArticleHandler {
+func NewArticleHandler(au usecase.IArticleUsecase, ap presenter.IArticlePresenter) *ArticleHandler {
 	return &ArticleHandler{
-		ArticleUsecase:  au,
-		ResponseUsecase: ru,
+		ArticleUsecase:   au,
+		ArticlePresenter: ap,
 	}
 }
 
@@ -51,7 +51,7 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 func (ah *ArticleHandler) GetAll(c echo.Context) error {
 	articles := ah.ArticleUsecase.GetAll()
 
-	return c.JSON(http.StatusOK, ah.ResponseUsecase.MappingAll(articles))
+	return c.JSON(http.StatusOK, ah.ArticlePresenter.MappingAll(&articles))
 }
 
 // GetOne return error
@@ -63,5 +63,5 @@ func (ah *ArticleHandler) GetOne(c echo.Context) error {
 
 	article := ah.ArticleUsecase.GetOne(ID)
 
-	return c.JSON(http.StatusOK, ah.ResponseUsecase.MappingOne(&article))
+	return c.JSON(http.StatusOK, ah.ArticlePresenter.MappingOne(&article))
 }

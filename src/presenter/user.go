@@ -2,17 +2,10 @@ package presenter
 
 import (
 	"torimo-article-api/src/domain/model"
-	"torimo-article-api/src/presenter/response"
-	"torimo-article-api/src/domain/response_repository"
+	"torimo-article-api/src/handler/response"
 )
 
-type UserDataConvert struct{}
-
-func NewUserDataConvert() response_repository.IUserRepository {
-	return &UserDataConvert{}
-}
-
-func (u *UserDataConvert) Convert(user *model.User) *response.ResponseUser {
+func convertUserResponse(user *model.User) *response.ResponseUser {
 	return &response.ResponseUser{
 		ID:                  user.ID,
 		Name:                user.Name,

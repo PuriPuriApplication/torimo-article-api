@@ -18,10 +18,7 @@ func Initialize(d *gorm.DB) *handler.ArticleHandler {
 		datastore.NewArticleDatastore,
 		datastore.NewArticleCategoryDatastore,
 		interactor.NewArticleInteractor,
-		presenter.NewUserDataConvert,
-		presenter.NewShopDataConvert,
-		presenter.NewCategoryDataConvert,
-		interactor.NewResponseInteractor,
+		presenter.NewArticlePresenter,
 		handler.NewArticleHandler,
 	)
 	return nil
