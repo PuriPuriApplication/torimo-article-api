@@ -1,4 +1,4 @@
-package response_model
+package response
 
 type ResponseArticle struct {
 	ID         uint64              `json:"id"`

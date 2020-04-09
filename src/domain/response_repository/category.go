@@ -1,10 +1,10 @@
 package response_repository
 
 import (
-	"torimo-article-api/src/domain/article_model"
-	"torimo-article-api/src/domain/response_model"
+	"torimo-article-api/src/domain/model"
+	"torimo-article-api/src/presenter/response"
 )
 
 type ICategoryRepository interface {
-	Convert(category []article_model.Category) []*response_model.ResponseCategory
+	Convert(category []model.Category) []*response.ResponseCategory
 }

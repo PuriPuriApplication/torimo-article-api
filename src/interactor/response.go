@@ -1,9 +1,9 @@
 package interactor
 
 import (
-	"torimo-article-api/src/domain/article_model"
-	"torimo-article-api/src/domain/response_model"
+	"torimo-article-api/src/presenter/response"
 	"torimo-article-api/src/domain/response_repository"
+	"torimo-article-api/src/domain/model"
 	"torimo-article-api/src/usecase"
 )
 
@@ -25,10 +25,10 @@ func NewResponseInteractor(
 	}
 }
 
-func (ri *ResponseInteractor) CreateAll(a []article_model.Article) *[]response_model.ResponseArticle {
-	var responses []response_model.ResponseArticle
+func (ri *ResponseInteractor) CreateAll(a []model.Article) *[]response.ResponseArticle {
+	var responses []response.ResponseArticle
 	for _, v := range a {
-		response := response_model.ResponseArticle{
+		response := response.ResponseArticle{
 			ID:         v.ID,
 			Title:      v.Title,
 			Body:       v.Body,
@@ -43,8 +43,8 @@ func (ri *ResponseInteractor) CreateAll(a []article_model.Article) *[]response_m
 	return &responses
 }
 
-func (ri *ResponseInteractor) CreateOne(a *article_model.Article) *response_model.ResponseArticle {
-	return &response_model.ResponseArticle{
+func (ri *ResponseInteractor) CreateOne(a *model.Article) *response.ResponseArticle {
+	return &response.ResponseArticle{
 		ID:         a.ID,
 		Title:      a.Title,
 		Body:       a.Body,

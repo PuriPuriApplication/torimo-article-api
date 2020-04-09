@@ -1,8 +1,8 @@
-package dataconvert
+package presenter
 
 import (
-	"torimo-article-api/src/domain/article_model"
-	"torimo-article-api/src/domain/response_model"
+	"torimo-article-api/src/domain/model"
+	"torimo-article-api/src/presenter/response"
 	"torimo-article-api/src/domain/response_repository"
 )
 
@@ -12,8 +12,8 @@ func NewUserDataConvert() response_repository.IUserRepository {
 	return &UserDataConvert{}
 }
 
-func (u *UserDataConvert) Convert(user *article_model.User) *response_model.ResponseUser {
-	return &response_model.ResponseUser{
+func (u *UserDataConvert) Convert(user *model.User) *response.ResponseUser {
+	return &response.ResponseUser{
 		ID:                  user.ID,
 		Name:                user.Name,
 		ExternalServiceID:   user.ExternalServiceID,

@@ -1,15 +1,14 @@
-package article_model
+package model
 
 import (
 	"time"
 )
 
-type Shop struct {
+type Category struct {
 	ID         uint64
 	Name       string
-	StationID  uint64
 	CreateUser uint64
 	IsDeleted  bool
-	CreateAt   time.Time
+	CreateAt   *time.Time
 	DeleteAt   *time.Time
 }

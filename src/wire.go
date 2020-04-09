@@ -6,11 +6,11 @@ import (
 	"github.com/google/wire"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"torimo-article-api/src/infrastructure/dataconvert"
 
 	"torimo-article-api/src/handler"
 	"torimo-article-api/src/infrastructure/datastore"
 	"torimo-article-api/src/interactor"
+	"torimo-article-api/src/presenter"
 )
 
 func Initialize(d *gorm.DB) *handler.ArticleHandler {
@@ -18,9 +18,9 @@ func Initialize(d *gorm.DB) *handler.ArticleHandler {
 		datastore.NewArticleDatastore,
 		datastore.NewArticleCategoryDatastore,
 		interactor.NewArticleInteractor,
-		dataconvert.NewUserDataConvert,
-		dataconvert.NewShopDataConvert,
-		dataconvert.NewCategoryDataConvert,
+		presenter.NewUserDataConvert,
+		presenter.NewShopDataConvert,
+		presenter.NewCategoryDataConvert,
 		interactor.NewResponseInteractor,
 		handler.NewArticleHandler,
 	)

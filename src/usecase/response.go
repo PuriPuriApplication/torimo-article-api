@@ -1,11 +1,11 @@
 package usecase
 
 import (
-	"torimo-article-api/src/domain/article_model"
-	"torimo-article-api/src/domain/response_model"
+	"torimo-article-api/src/domain/model"
+	"torimo-article-api/src/presenter/response"
 )
 
 type IResponseUsecase interface {
-	CreateAll(a []article_model.Article) *[]response_model.ResponseArticle
-	CreateOne(a *article_model.Article) *response_model.ResponseArticle
+	CreateAll(a []model.Article) *[]response.ResponseArticle
+	CreateOne(a *model.Article) *response.ResponseArticle
 }

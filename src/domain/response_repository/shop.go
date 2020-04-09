@@ -1,10 +1,10 @@
 package response_repository
 
 import (
-	"torimo-article-api/src/domain/article_model"
-	"torimo-article-api/src/domain/response_model"
+	"torimo-article-api/src/domain/model"
+	"torimo-article-api/src/presenter/response"
 )
 
 type IShopRepository interface {
-	Convert(shop *article_model.Shop) *response_model.ResponseShop
+	Convert(shop *model.Shop) *response.ResponseShop
 }

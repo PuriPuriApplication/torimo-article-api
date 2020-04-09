@@ -1,10 +1,10 @@
 package response_repository
 
 import (
-	"torimo-article-api/src/domain/article_model"
-	"torimo-article-api/src/domain/response_model"
+	"torimo-article-api/src/domain/model"
+	"torimo-article-api/src/presenter/response"
 )
 
 type IUserRepository interface {
-	Convert(user *article_model.User) *response_model.ResponseUser
+	Convert(user *model.User) *response.ResponseUser
 }
