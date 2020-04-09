@@ -9,11 +9,15 @@ rm:
 	-docker rm $(shell docker ps -a --filter 'status=exited' -q)
 
 .PHONY: run
-run: up log
+run: updb upgo log
 
-.PHONY: up
-up:
-	docker-compose up -d
+.PHONY: updb
+updb:
+	docker-compose up -d mysql
+
+.PHONY: upgo
+upgo:
+	docker-compose up -d $(APP)
 
 .PHONY: reload
 reload: rm build restart log
