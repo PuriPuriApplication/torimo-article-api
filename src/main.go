@@ -1,7 +1,6 @@
 package main
 
 import (
-	"torimo-article-api/src/driver"
 	"torimo-article-api/src/handler/custom"
 
 	"net/http"
@@ -11,10 +10,7 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
-func main() {
-	// create instance
-	e := echo.New()
-
+func echoUse(e *echo.Echo) {
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
@@ -29,23 +25,11 @@ func main() {
 	e.Validator = &custom.CustomValidator{
 		Validator: validator.New(),
 	}
+}
 
-	// Handler
-	d := driver.Init()
-	// defer db.Close(d)
-
-	h := Initialize(d)
-
-	e.GET("/health", func(c echo.Context) error {
-		return c.String(http.StatusOK, "OK")
-	})
-	e.POST("/articles", h.CreateArticle)
-	e.GET("/articles", h.GetAll)
-	e.GET("/articles/:id", h.GetOne)
-	// e.GET("/articles/:id", h.GetArticle)
-	// e.PUT("/articles/:id", h.UpdateArticle)
-	// e.DELETE("/articles/:id", h.DeleteArticle)
-
-	// Start server
+func main() {
+	e := echo.New()
+	echoUse(e)
+	routing(e)
 	e.Logger.Fatal(e.Start(":8080"))
 }

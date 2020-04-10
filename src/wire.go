@@ -13,7 +13,7 @@ import (
 	"torimo-article-api/src/presenter"
 )
 
-func Initialize(d *gorm.DB) *handler.ArticleHandler {
+func InitArticleHandler(d *gorm.DB) *handler.ArticleHandler {
 	wire.Build(
 		datastore.NewArticleDatastore,
 		datastore.NewArticleCategoryDatastore,
