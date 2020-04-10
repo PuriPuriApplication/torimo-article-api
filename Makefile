@@ -40,3 +40,11 @@ down:
 .PHONY: rmi
 rmi:
 	docker image prune -f
+
+.PHONY: exec
+exec:
+	docker exec -it article sh
+
+.PHONY: sql
+sql:
+	mysql -u torimo -p torimo -h 127.0.0.1
