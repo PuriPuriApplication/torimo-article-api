@@ -26,3 +26,8 @@ func (ac *ArticleCategoryDatastore) SaveCategoriesForArticle(articleID uint64, c
 		ac.db.Model(&article).Association("Categories").Append(&category)
 	})
 }
+
+func (ac *ArticleCategoryDatastore) DeleteByAriticleID(articleID uint64) {
+	article := model.Article{ID: articleID}
+	ac.db.Model(&article).Association("Categories").Clear()
+}

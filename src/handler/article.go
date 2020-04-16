@@ -27,7 +27,7 @@ func NewArticleHandler(au usecase.IArticleUsecase, ap presenter.IArticlePresente
 
 // CreateArticle return error
 func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
-	ra := new(request.CreateArticleRequest)
+	ra := new(request.UpsertArticleRequest)
 
 	if err := c.Bind(ra); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
@@ -45,6 +45,26 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 	articleID := ah.ArticleUsecase.Create(ra)
 
 	return c.JSON(http.StatusCreated, articleID)
+}
+
+func (ah *ArticleHandler) UpdateArticle(c echo.Context) error {
+	ra := new(request.UpsertArticleRequest)
+
+	if err := c.Bind(ra); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+	if err := c.Validate(ra); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.(validator.ValidationErrors).Error())
+	}
+
+	ID, err := strconv.ParseUint(c.Param("id"), 10, 64)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	ah.ArticleUsecase.Update(ID, ra)
+
+	return c.NoContent(http.StatusNoContent)
 }
 
 // GetAll return error

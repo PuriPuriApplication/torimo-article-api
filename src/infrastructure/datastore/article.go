@@ -19,8 +19,12 @@ func NewArticleDatastore(d *gorm.DB) repository.IArticleRepository {
 	}
 }
 
-func (a *ArticleDatastore) Save(article *model.Article) {
+func (a *ArticleDatastore) Create(article *model.Article) {
 	a.db.Create(&article)
+}
+
+func (a *ArticleDatastore) Update(article *model.Article)  {
+	a.db.Save(&article)
 }
 
 func (a *ArticleDatastore) FindAll() []model.Article {

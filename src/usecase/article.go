@@ -6,7 +6,8 @@ import (
 )
 
 type IArticleUsecase interface {
-	Create(requestArticle *request.CreateArticleRequest) uint64
+	Create(requestArticle *request.UpsertArticleRequest) uint64
+	Update(id uint64, requestArticle *request.UpsertArticleRequest)
 	GetAll() []model.Article
 	GetOne(ID uint64) model.Article
 }

@@ -24,6 +24,6 @@ func routing(e *echo.Echo) {
 	e.GET(articlePath, h.GetAll)
 	e.GET(articlePath+"/:id", h.GetOne)
 	// e.GET("/articles/:id", h.GetArticle)
-	// e.PUT("/articles/:id", h.UpdateArticle)
+	e.PUT("/articles/:id", h.UpdateArticle)
 	// e.DELETE("/articles/:id", h.DeleteArticle)
 }

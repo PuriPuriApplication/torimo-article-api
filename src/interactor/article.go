@@ -23,7 +23,7 @@ func NewArticleInteractor(
 	}
 }
 
-func (a *ArticleInteractor) Create(ra *request.CreateArticleRequest) uint64 {
+func (a *ArticleInteractor) Create(ra *request.UpsertArticleRequest) uint64 {
 	article := model.Article{
 		Title:    ra.Title,
 		Body:     ra.Body,
@@ -33,10 +33,26 @@ func (a *ArticleInteractor) Create(ra *request.CreateArticleRequest) uint64 {
 		CreateAt: time.Now(),
 	}
 
-	a.Repository.Save(&article)
+	a.Repository.Create(&article)
 	a.ArticleCategoryRepository.SaveCategoriesForArticle(article.ID, ra.CategoryIDs)
 
 	return article.ID
+}
+
+func (a *ArticleInteractor) Update(id uint64, ra *request.UpsertArticleRequest) {
+	article := model.Article{
+		ID:       id,
+		Title:    ra.Title,
+		Body:     ra.Body,
+		Status:   ra.Status,
+		UserID:   ra.UserID,
+		ShopID:   ra.ShopID,
+		CreateAt: time.Now(),
+	}
+
+	a.ArticleCategoryRepository.DeleteByAriticleID(article.ID)
+	a.Repository.Update(&article)
+	a.ArticleCategoryRepository.SaveCategoriesForArticle(article.ID, ra.CategoryIDs)
 }
 
 func (a *ArticleInteractor) GetAll() []model.Article {

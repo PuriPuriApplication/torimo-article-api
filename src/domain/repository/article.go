@@ -5,7 +5,8 @@ import (
 )
 
 type IArticleRepository interface {
-	Save(article *model.Article)
+	Create(article *model.Article)
+	Update(article *model.Article)
 	FindAll() []model.Article
 	FindOne(ID uint64) model.Article
 }
