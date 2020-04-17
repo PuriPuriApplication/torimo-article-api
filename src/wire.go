@@ -23,3 +23,12 @@ func InitArticleHandler(d *gorm.DB) *handler.ArticleHandler {
 	)
 	return nil
 }
+
+// func InitArticleTestHandler() *handler.ArticleHandler {
+// 	wire.Build(
+// 		interactor.NewArticleMockInteractor,
+// 		presenter.NewArticleMockPresenter,
+// 		handler.NewArticleHandler,
+// 	)
+// 	return nil
+// }

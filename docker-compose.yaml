@@ -32,3 +32,35 @@ services:
       - ./docker/mysql/sql:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
+
+  torimo-article-api-test:
+    container_name: article-test
+    environment:
+      DB_USER: torimo_test
+      DB_PASSWORD: torimo_test
+      DB_DBNAME: torimo_test
+      DB_URL: mysql:3307
+    build: .
+    image: article-test
+    working_dir: "/torimo-article-api"
+    ports:
+      - 8081:8080
+    depends_on:
+      - mysql-test
+
+  mysql-test:
+    image: mysql:5.7
+    container_name: mysql-test
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: torimo_test
+      MYSQL_USER: torimo_test
+      MYSQL_PASSWORD: torimo_test
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./docker/mysql-test/data:/var/lib/mysql
+      - ./docker/mysql-test/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/mysql-test/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3307:3306
