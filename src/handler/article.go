@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -30,9 +31,12 @@ func (ah *ArticleHandler) CreateArticle(c echo.Context) error {
 	ra := new(request.UpsertArticleRequest)
 
 	if err := c.Bind(ra); err != nil {
+		fmt.Println("1.", err)
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 	if err := c.Validate(ra); err != nil {
+		fmt.Println(ra)
+		fmt.Println("2.", err)
 		return echo.NewHTTPError(http.StatusBadRequest, err.(validator.ValidationErrors).Error())
 	}
 

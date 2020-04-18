@@ -6,9 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"torimo-article-api/src/handler"
-	"torimo-article-api/tests/interactor"
-	"torimo-article-api/tests/presenter"
+	"torimo-article-api/src/interactor"
+	"torimo-article-api/src/presenter"
 
 	"github.com/labstack/echo"
 	"github.com/stretchr/testify/assert"
@@ -18,18 +17,19 @@ const (
 	articleJSON = `"{"title":"test title","body":"test body","status":"public","userId":1,"shopId":1,"categoryIds":[1]}"`
 )
 
-func TestCreateUser(t *testing.T) {
+func TestCreateArticle(t *testing.T) {
 	// Setup
 	e := echo.New()
 	req := httptest.NewRequest(http.MethodPost, "/articles", strings.NewReader(articleJSON))
-	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+	// req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
+	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationForm)
 	rec := httptest.NewRecorder()
 	c := e.NewContext(req, rec)
 
 	// h := InitArticleHandler()
-	h := handler.NewArticleHandler(
-		interactor.NewArticleInteractor(),
-		presenter.NewArticlePresenter(),
+	h := NewArticleHandler(
+		interactor.NewArticleMockInteractor(),
+		presenter.NewArticleMockPresenter(),
 	)
 
 	// Assertions

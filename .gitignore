@@ -6,6 +6,7 @@ bin
 
 # MySQL container
 docker/mysql/data
+docker/mysql-test/data
 
 # wire
 src/wire_gen.go

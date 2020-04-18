@@ -39,7 +39,7 @@ services:
       DB_USER: torimo_test
       DB_PASSWORD: torimo_test
       DB_DBNAME: torimo_test
-      DB_URL: mysql:3307
+      DB_URL: mysql-test:3307
     build: .
     image: article-test
     working_dir: "/torimo-article-api"
