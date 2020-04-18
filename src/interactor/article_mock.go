@@ -13,12 +13,12 @@ func NewArticleMockInteractor() usecase.IArticleUsecase {
 	return &ArticleMockInteractor{}
 }
 
-func (ami *ArticleMockInteractor) Create(ra *request.CreateArticleRequest) uint64 {
+func (ami *ArticleMockInteractor) Create(ra *request.UpsertArticleRequest) uint64 {
 	fmt.Println("Create article")
 	return 1
 }
 
-func (a *ArticleInteractor) Update(id uint64, ra *request.UpsertArticleRequest) {
+func (ami *ArticleMockInteractor) Update(id uint64, ra *request.UpsertArticleRequest) {
 	fmt.Println("Update article")
 }
 

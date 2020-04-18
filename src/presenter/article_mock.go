@@ -5,22 +5,22 @@ import (
 	"torimo-article-api/src/domain/model"
 	"torimo-article-api/src/domain/presenter"
 	"torimo-article-api/src/handler/response"
-
-	"github.com/thoas/go-funk"
 )
 
 type ArticleMockPresenter struct{}
 
 func NewArticleMockPresenter() presenter.IArticlePresenter {
-	return &ArticlePresenter{}
+	return &ArticleMockPresenter{}
 }
 
 func (amp *ArticleMockPresenter) MappingAll(articles *[]model.Article) []*response.ResponseArticle {
 	fmt.Println("Mapping of ", articles)
-	return []&response.ResponseArticle{}
+	return []*response.ResponseArticle{
+		&response.ResponseArticle{},
+	}
 }
 
 func (amp *ArticleMockPresenter) MappingOne(a *model.Article) *response.ResponseArticle {
-	fmt.Println("Mapping of ", articles)
+	fmt.Println("Mapping of ", a)
 	return &response.ResponseArticle{}
 }
