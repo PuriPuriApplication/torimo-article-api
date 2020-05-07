@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
   torimo-article-api:
@@ -8,13 +8,17 @@ services:
       DB_PASSWORD: torimo
       DB_DBNAME: torimo
       DB_URL: mysql:3306
-    build: .
-    image: article
-    working_dir: "/torimo-article-api"
+    build:
+      context: .
+      target: build
     ports:
       - 8080:8080
     depends_on:
       - mysql
+    # TODO: cd を削除すること
+    command: ash -c 'cd src/ && realize start --run --no-config'
+    volumes:
+      - ./:/torimo-article-api
 
   mysql:
     image: mysql:5.7

@@ -9,3 +9,5 @@ docker/mysql/data
 
 # wire
 src/wire_gen.go
+
+*.realize.yaml
